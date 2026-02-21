@@ -1,0 +1,9 @@
+<ul class="search-results">
+  {{#results}}
+  <li class="search-result">
+    <div class="search-result__title">{{.title}}</div>
+    <p class="search-result__snippet">{{.snippet}}</p>
+    <a class="search-result__url" href="{{.url}}" target="_blank" rel="noopener">{{.url}}</a>
+  </li>
+  {{/results}}
+</ul>

@@ -1,0 +1,58 @@
+{
+  "name": "duckduckgo_search",
+  "version": "1.0",
+  "description": "Search the web for current information via DuckDuckGo. Returns titles, snippets, and URLs. Use for general web searches, news, facts, and research. Do NOT use for YouTube video searches — use the youtube tool for that.",
+  "documentation": "Searches the web for current information via DuckDuckGo, returning titles, snippets, and URLs. Use when the user asks about recent events, current data, or topics that may have changed since training. Common triggers: asking about news, current prices, recent updates to products or services, checking if information is still accurate, looking up unfamiliar companies or products, finding restaurants or venues in a location, searching for technical documentation or solutions to programming errors, checking sports results or upcoming events. Do NOT use for YouTube video searches (use the youtube tool instead). Pair with web_read for full article content when snippets are insufficient.",
+  "category": "research",
+  "icon": "https://www.vectorlogo.zone/logos/duckduckgo/duckduckgo-icon.svg",
+  "trigger": {
+    "type": "on_demand",
+    "description": "Initiated by Chalie during reasoning when external information is needed"
+  },
+
+  "parameters": {
+    "query": { "type": "string", "required": true, "description": "Search query text" },
+    "limit": { "type": "integer", "required": false, "default": 5, "description": "Max results (1-10)" }
+  },
+
+  "returns": {
+    "results": { "type": "array", "description": "List of {title, snippet, url}" },
+    "count": { "type": "integer", "description": "Number of results returned" }
+  },
+
+  "constraints": {
+    "timeout_seconds": 8
+  },
+
+  "config_schema": {
+    "DUCKDUCKGO_TIMEOUT": {
+      "type": "string",
+      "required": false,
+      "secret": false,
+      "description": "Request timeout in seconds",
+      "default": "8"
+    }
+  },
+
+  "sandbox": {
+    "network": "bridge",
+    "memory": "256m",
+    "writable": true
+  },
+
+  "tips": [
+    "Use for current information not in memory",
+    "Pair with web_read to get full article content from promising results",
+    "Use memorize to persist key findings as gists or facts"
+  ],
+
+  "output": {
+    "synthesize": true,
+    "card": {
+      "enabled": true,
+      "title": "Web Search Results",
+      "accent_color": "#FF5722",
+      "background_color": "rgba(255, 87, 34, 0.06)"
+    }
+  }
+}
